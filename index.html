@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Booking Appointment App</title>
+  <style>
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body class="container "  style="text-align: center; width: 50%;">
+  <h1>Booking Appointment</h1>
+  <form id="bookingForm">
+    <label for="name">Name:</label>
+    <input type="text" id="name" required>
+    <br><br>
+    <label for="phone">Phone Number:</label>
+    <input type="tel" id="phone" required>
+    <br><br>
+    <label for="email">Email:</label>
+    <input type="email" id="email" required>
+    <br><br>
+    <label for="date">Date:</label>
+    <input type="date" id="date" required>
+    <br><br>
+    <label for="time">Time:</label>
+    <input type="time" id="time" required>
+    <br><br>
+    <input type="submit" value="Book Appointment">
+  </form>
+
+  <h2>Appointments</h2>
+  <ul id="appointmentList"></ul>
+  
+  <script src="script.js"></script>
+</body>
+</html>
