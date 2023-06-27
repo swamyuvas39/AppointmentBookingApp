@@ -44,18 +44,16 @@ function bookAppointment(event) {
 }
 
 // Function to delete an appointment
-function deleteAppointment(index) {
-  // Retrieve existing appointments from local storage
-  var existingAppointments = JSON.parse(localStorage.getItem('appointments')) || [];
+function deleteAppointment(id, listItem) {
+  // Delete appointment data from CRUD server
+  axios.delete(`https://crudcrud.com/api/72cd65b641424c1bb0b1097843c8bbf0/appointmentData/${id}`)
+    .then(function(response) {
+      console.log('Appointment data deleted from server:', response.data);
 
-  // Remove the appointment at the specified index
-  existingAppointments.splice(index, 1);
-
-  // Save updated appointments to local storage
-  localStorage.setItem('appointments', JSON.stringify(existingAppointments));
-
-  // Display the appointments on the webpage
-  displayAppointments();
+      // Remove the appointment from the webpage
+      listItem.remove();
+    })
+    .catch(err=>console.log(err));
 }
 
 // Function to edit an appointment
@@ -101,7 +99,7 @@ function displayAppointments() {
       <strong>Date:</strong> ${appointment.date}<br>
       <strong>Time:</strong> ${appointment.time}<br>
       <button onclick="editAppointment(${index})">Edit</button>
-      <button onclick="deleteAppointment(${index})">Delete</button>
+      <button onclick="deleteAppointment('${appointment._id}', this.parentNode)">Delete</button>
       <hr>
     `;
     appointmentList.appendChild(listItem);
@@ -112,18 +110,15 @@ function displayAppointments() {
 function fetchAppointments() {
   axios.get("https://crudcrud.com/api/72cd65b641424c1bb0b1097843c8bbf0/appointmentData")
     .then(function(response) {
-/*       var appointments = response.data;
+      var appointments = response.data;
 
       // Save fetched appointments to local storage
       localStorage.setItem('appointments', JSON.stringify(appointments));
 
       // Display the appointments on the webpage
-      displayAppointments(); */
-      console.log(response.data);
+      displayAppointments();
     })
-    .catch(function(error) {
-      console.error('Error fetching appointment data:', error);
-    });
+    .catch(err=>console.log(err));
 }
 
 // Event listener for form submission
