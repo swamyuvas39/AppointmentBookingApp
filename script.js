@@ -23,9 +23,22 @@ function bookAppointment(event) {
   
     // Add new appointment to existing appointments
     existingAppointments.push(appointment);
+
+   // Create appointment object
+      var appointment = {
+        name: name,
+        phone: phone,
+        email: email,
+        date: date,
+        time: time
+      };
+    // saving data into the crucruc backend service
+      axios.post("https://crudcrud.com/api/72cd65b641424c1bb0b1097843c8bbf0/appointmentData", appointment)
+            .then((res)=>console.log(res))
+            .catch(err=>console.log(err));
   
     // Save updated appointments to local storage
-    localStorage.setItem('appointments', JSON.stringify(existingAppointments));
+    //localStorage.setItem('appointments', JSON.stringify(existingAppointments));
   
     // Display success message
     var messageDiv = document.getElementById('message');
